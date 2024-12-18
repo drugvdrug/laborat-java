@@ -1,49 +1,59 @@
 package lab4.second;
 
 public class ComplexNumber {
-    private final double real; // Действительная часть
-    private final double imaginary; // Мнимая часть
+    private double real;
+    private double imaginary;
 
-    // Конструктор для создания комплексного числа из действительной и мнимой частей
     public ComplexNumber(double real, double imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
 
-    // Метод для преобразования из полярной формы в алгебраическую
-    public static ComplexNumber fromPolar(double modulus, double argument) {
-        double real = modulus * Math.cos(argument); // Действительная часть
-        double imaginary = modulus * Math.sin(argument); // Мнимая часть
-        return new ComplexNumber(real, imaginary);
-    }
-
-    // Метод для получения действительной части
     public double getReal() {
         return real;
     }
 
-    // Метод для получения мнимой части
     public double getImaginary() {
         return imaginary;
     }
 
-    // Переопределение метода toString для удобного отображения комплексного числа
-    @Override
-    public String toString() {
-        if (imaginary >= 0) {
-            return real + " + " + imaginary + "i";
-        } else {
-            return real + " - " + Math.abs(imaginary) + "i";
+    public PolarCoordinates toPolar() {
+        double modulus = Math.sqrt(real * real + imaginary * imaginary);
+        double argument = Math.atan2(imaginary, real);
+        return new PolarCoordinates(modulus, argument);
+    }
+
+    public void display() {
+        System.out.printf("Комплексное число: %.2f + %.2fi%n", real, imaginary);
+    }
+
+    public static class PolarCoordinates {
+        private double modulus;
+        private double argument;
+
+        public PolarCoordinates(double modulus, double argument) {
+            this.modulus = modulus;
+            this.argument = argument;
+        }
+
+        public double getModulus() {
+            return modulus;
+        }
+
+        public double getArgument() {
+            return argument;
+        }
+
+        public void display() {
+            System.out.printf("Полярные координаты: модуль = %.2f, аргумент = %.2f радиан%n", modulus, argument);
         }
     }
 
-    // Пример использования
     public static void main(String[] args) {
-        // Пример преобразования из полярной формы
-        double modulus = 5; // Модуль
-        double argument = Math.PI / 4; // Аргумент (угол в радианах)
+        ComplexNumber complexNumber = new ComplexNumber(3, 4);
+        complexNumber.display();
 
-        ComplexNumber complexNumber = ComplexNumber.fromPolar(modulus, argument);
-        System.out.println("Комплексное число в алгебраической форме: " + complexNumber);
+        PolarCoordinates polarCoordinates = complexNumber.toPolar();
+        polarCoordinates.display();
     }
 }
