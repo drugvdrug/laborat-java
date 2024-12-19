@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class MusicPlayerApp {
 
-    // Модель песни
     static class Song {
         private String title;
         private String artist;
@@ -39,7 +38,6 @@ public class MusicPlayerApp {
         }
     }
 
-    // Представление
     static class MusicPlayerView {
         public void displayCurrentSong(Song song) {
             if (song.isPlaying()) {
@@ -54,7 +52,6 @@ public class MusicPlayerApp {
         }
     }
 
-    // Контроллер
     static class MusicPlayerController {
         private MusicPlayerView view;
         private List<Song> songs;

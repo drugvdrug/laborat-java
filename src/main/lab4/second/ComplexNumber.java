@@ -48,12 +48,4 @@ public class ComplexNumber {
             System.out.printf("Полярные координаты: модуль = %.2f, аргумент = %.2f радиан%n", modulus, argument);
         }
     }
-
-    public static void main(String[] args) {
-        ComplexNumber complexNumber = new ComplexNumber(3, 4);
-        complexNumber.display();
-
-        PolarCoordinates polarCoordinates = complexNumber.toPolar();
-        polarCoordinates.display();
-    }
 }
